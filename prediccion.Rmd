@@ -1,0 +1,39 @@
+```{r}
+library('Quandl')
+library('ggplot2')
+library('lubridate')
+```
+
+#Descarga de datos
+```{r}
+mydata = Quandl("CURRFX/USDCOP")
+```
+#Seleccion del intervalo de tiempo
+```{r}
+intervalo <- seq(as.Date("2000-01-01"), as.Date("2015-02-23"), by="days")
+data <- droplevels(subset(mydata, Date %in% intervalo))
+```
+
+#Primeros cinco datos de la serie
+```{r}
+head(data, n=5)
+```
+
+#Grafica
+```{r}
+ggplot(data, aes(x = Date, y = Rate)) + geom_line() + geom_point() + ggtitle("USD price in COP \n From 2000-01-01 to 2015-02-23")
+```
+
+#Grafica por años
+```{r fig.width=15, fig.height=10}
+years <- year(data[,c("Date")])
+data$Year <- years
+ggplot(data, aes(x = Date, y = Rate)) + geom_line() + geom_point() + ggtitle("USD price in COP \n From 2000-01-01 to 2015-02-23") + facet_wrap(~ Year, scales = "free")  +  theme(plot.title = element_text(size = rel(3)))
+```
+
+
+
+
+
+
+
