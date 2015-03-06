@@ -31,13 +31,12 @@ datos$Year <- years
 ggplot(datos, aes(x = Date, y = Rate)) + geom_line() + geom_point() + ggtitle("USD price in COP \n From 2000-01-01 to 2015-02-23") + facet_wrap(~ Year, scales = "free")  +  theme(plot.title = element_text(size = rel(3)))
 ```
 
-De acuerdo a una publicación de la facultad de Economía de la Universidad de los Andes (se encuentra disponible en: https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxtYWNyb3lmaW5hbnphc212fGd4OjU1OTEwNGUzZDVjMzljZ), ningún modelo resulta preciso para lograr una predicción si quiera de la tendencia del precio del dolar. Sin embargo, el que resulta menos desfavorable es trazar una curva que sea el promedio de los datos (es decir trazarla por la mitad) y no intentar reproducir el comportamiento exacto con una función. Es por lo anterior la función adecuada para usar es lm.
+De acuerdo a una publicación de la facultad de Economía de la Universidad de los Andes (se encuentra disponible en: https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxtYWNyb3lmaW5hbnphc212fGd4OjU1OTEwNGUzZDVjMzljZ), ningún modelo resulta preciso para lograr una predicción si quiera de la tendencia del precio del dolar. Sin embargo, el que resulta menos desfavorable es trazar una curva que sea el promedio de los datos (es decir trazarla por la mitad) y no intentar reproducir el comportamiento exacto con una función. Es por lo anterior la función adecuada para usar es lm. 
 
 ```{r}
 fit <- lm(Rate ~ Date, datos)
-plot(Rate ~ Date, datos)
-abline(fit)
 ```
+Usando la información que se provee en la publicación citada, la predicción del precio del dólar para 01-01-2017 será de $1844 COP.
 
 
 
